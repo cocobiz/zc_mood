@@ -1,0 +1,255 @@
+@CHARSET "UTF-8";
+.get-connected {
+    clear: both;
+    margin-top: 20px;
+    padding-bottom: 40px;
+}
+.get-connected .inner-container {
+    padding-top: 30px;
+}
+.get-connected-block, .social-feeds {
+    display: inline-block;
+    vertical-align: top;
+    width: 329px;
+}
+.get-connected-block.instagram {
+    margin-left: -12px;
+}
+.get-connected-block.pinterest {
+    margin-left: -7px;
+}
+.get-connected .social-feeds {
+    margin-left: -5px;
+}
+.get-connected-block-title {
+    height: 40px;
+    margin-bottom: 7px;
+    margin-left: 12px;
+    text-indent: -9999px;
+}
+.get-connected-block.instagram .get-connected-block-title {
+    background: url("../images/sprites.png") repeat scroll -30px -311px rgba(0, 0, 0, 0);
+    width: 160px;
+}
+.get-connected-block.instagram .get-connected-block-title a {
+    display: block;
+    height: 40px;
+    width: 160px;
+}
+.get-connected-block.pinterest .get-connected-block-title {
+    background: url("../images/sprites.png") repeat scroll -30px -351px rgba(0, 0, 0, 0);
+    width: 143px;
+}
+.get-connected-block.pinterest .get-connected-block-title a {
+    display: block;
+    height: 40px;
+    width: 143px;
+}
+.get-connected-block-content {
+    background: url("../images/get-connected_block.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 238px;
+    padding: 0 10px 0 23px;
+}
+.instagram-content, .pinterest-content {
+    height: 171px;
+    padding-top: 19px;
+}
+.instagram-content .error, .pinterest-content .error {
+    color: #000000;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.5;
+    margin: 50px 30px 0;
+    text-align: center;
+}
+.instagram-content.loading, .pinterest-content.loading {
+    background-position: center 72px;
+}
+.instagram-title, .pinterest-title {
+    font: italic bold 14px Georgia,serif;
+    margin-bottom: 6px;
+}
+.instagram-info, .pinterest-info {
+    color: #000;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+.pinterest-info {
+    margin-bottom: 6px;
+}
+.instagram-info span {
+    margin-right: 6px;
+}
+.instagram-info .photos span, .instagram-info .followers span {
+    background: url("../images/sprites.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 13px;
+    vertical-align: -1px;
+    width: 17px;
+}
+.instagram-info .photos span {
+    background-position: -100px -185px;
+}
+.instagram-info .followers span {
+    background-position: -125px -185px;
+}
+.pinterest-images li {
+    float: left;
+    height: 53px;
+    margin-bottom: 4px;
+    margin-left: 4px;
+    overflow: hidden;
+    width: 53px;
+}
+.pinterest-images li:first-child {
+    height: 109px;
+    margin-left: 0;
+    width: 175px;
+}
+.pinterest-images li img {
+    vertical-align: top;
+}
+.pinterest-images li a img {
+    width: 100%;
+}
+.instagram-images a {
+    margin-left: 4px;
+}
+.instagram-images a:first-child {
+    margin-left: 0;
+}
+.instagram-images img {
+    height: 95px;
+}
+.get-connected .social-feeds .tabs-item {
+    border: medium none;
+    height: 255px;
+    padding-left: 24px;
+    width: 293px;
+}
+.get-connected .social-feeds .tabs-content {
+    background: url("../images/social-feeds-home.png") no-repeat scroll right bottom rgba(0, 0, 0, 0);
+    height: 255px;
+}
+.get-connected .social-feeds .tabs-content > ul {
+    width: 317px;
+}
+.get-connected .tabs-switches {
+    margin-left: 10px;
+}
+.social-feeds {
+    margin-left: 10px;
+    width: auto;
+}
+.social-feeds .tabs-item {
+    padding-left: 13px;
+    width: 280px;
+}
+.social-feeds .feeds-content {
+    font-size: 12px;
+    height: 189px;
+    line-height: 16px;
+    overflow: hidden;
+    padding-top: 19px;
+    position: relative;
+}
+.social-feeds .feeds-content ul {
+    width: 267px;
+}
+.social-feeds .feeds-content li {
+    clear: left;
+    padding-bottom: 15px;
+}
+.social-feeds .feed-img {
+    float: left;
+    margin-right: 13px;
+}
+.social-feeds .feed-content {
+    overflow: hidden;
+}
+.social-feeds .feed-content a {
+    color: #ec0000;
+}
+.social-feeds .feed-content a:hover {
+    text-decoration: none;
+}
+.social-feeds .feed-content b {
+    font-weight: bold;
+}
+.social-feeds .feed-content b a {
+    color: #d78017;
+    text-decoration: none;
+}
+.social-feeds .feed-content b a:hover {
+    color: #9f9f9f;
+}
+.social-feeds .feed-date {
+    color: #808080;
+}
+.social-feeds .feed-overlay {
+    background: url("../images/bgs.png") repeat-x scroll 0 -547px rgba(0, 0, 0, 0);
+    bottom: 0;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+
+
+.social-feeds .tabs-switches li {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: url("../images/sprites.png") repeat scroll 0 0 #fff;
+    border-color: #dbdbdb;
+    border-image: none;
+    border-radius: 1px 1px 0 0;
+    border-style: solid;
+    border-width: 1px 1px 0;
+    bottom: -1px;
+    height: 27px;
+    line-height: 27px;
+    margin-right: 3px;
+    position: relative;
+    text-indent: -9999px;
+}
+.social-feeds .tabs-switches li.twitter {
+    background-position: -30px -396px;
+    width: 113px;
+}
+.social-feeds .tabs-switches li.facebook {
+    background-position: -30px -423px;
+    width: 90px;
+}
+.social-feeds .tabs-switches li.active {
+    z-index: 100;
+}
+.social-feeds .tabs-content {
+    position: relative;
+    z-index: 10;
+}
+.social-feeds .tabs-content ul {
+    height: 242px;
+    overflow: hidden;
+    width: 295px;
+}
+.social-feeds .tabs-item {
+    border: 1px solid #dbdbdb;
+    border-radius: 0 0 1px 1px;
+    height: 240px;
+    width: 293px;
+}
+.get-connected .b-more-link {
+    color: #d78017;
+    font: italic bold 14px Georgia,serif;
+    text-decoration: none;
+}
+.get-connected .b-more-link span, .get-connected .b-more-link a span {
+    background: url("../images/sprites.png") no-repeat scroll 0 -205px rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 9px;
+    margin-right: 3px;
+    width: 6px;
+}

@@ -1,0 +1,119 @@
+2015-01-03 12:22:00
+-------------------
+(live transaction) --> https://api-3t.paypal.com/nvp
+Request Headers: 
+Array
+(
+    [0] => Content-Type: text/namevalue
+    [1] => X-VPS-Timeout: 90
+    [2] => X-VPS-VIT-Client-Type: PHP/cURL
+    [3] => X-VPS-VIT-Integration-Product: PHP::Zen Cart(R) - PayPal/NVP
+    [4] => X-VPS-VIT-Integration-Version: 1.5.1
+)
+
+
+Request Parameters: {SetExpressCheckout} 
+Array
+(
+    [AMT] => 19.99
+    [ITEMAMT] => 19.99
+    [L_NUMBER0] => 0002
+    [L_NAME0] => Off-White/Lime Floral Canvas [181]
+    [L_QTY0] => 1
+    [L_AMT0] => 19.99
+    [CURRENCYCODE] => USD
+    [LOCALECODE] => US
+    [GIFTMESSAGEENABLE] => 0
+    [GIFTRECEIPTEENABLE] => 0
+    [GIFTWRAPENABLE] => 0
+    [GIFTWRAPNAME] => 
+    [GIFTWRAPAMOUNT] => 0
+    [BUYEREMAILOPTINENABLE] => 0
+    [CUSTOMERSERVICENUMBER] => 
+    [BRANDNAME] => Demo
+    [PAYMENTACTION] => Sale
+    [ALLOWNOTE] => 1
+    [LANDINGPAGE] => Billing
+    [NOSHIPPING] => 0
+    [RETURNURL] => http://pro/zc_mood/ipn_main_handler.php?type=ec
+    [CANCELURL] => http://pro/zc_mood/index.php?main_page=shopping_cart&ec_cancel=1
+    [PAGESTYLE] => Primary
+    [METHOD] => SetExpressCheckout
+    [VERSION] => 61.0
+    [SUBJECT] => admin@mobanbase.com
+    [USER] => 
+    [PWD] => 
+    [SIGNATURE] => 
+)
+
+
+Response: 
+Array
+(
+    [] => 
+    [CURL_ERRORS] => (7) Failed connect to api-3t.paypal.com:443; No error
+)
+
+(7) Failed connect to api-3t.paypal.com:443; No error
+Array
+(
+    [url] => https://api-3t.paypal.com/nvp
+    [content_type] => 
+    [http_code] => 0
+    [header_size] => 0
+    [request_size] => 0
+    [filetime] => -1
+    [ssl_verify_result] => 0
+    [redirect_count] => 0
+    [total_time] => 20.998
+    [namelookup_time] => 0
+    [connect_time] => 0
+    [pretransfer_time] => 0
+    [size_upload] => 0
+    [size_download] => 0
+    [speed_download] => 0
+    [speed_upload] => 0
+    [download_content_length] => -1
+    [upload_content_length] => -1
+    [starttransfer_time] => 0
+    [redirect_time] => 0
+    [certinfo] => Array
+        (
+        )
+
+    [redirect_url] => 
+)
+
+
+SetExpressCheckout, Elapsed: 22002ms -- Failed
+(7) Failed connect to api-3t.paypal.com:443; No error
+Array
+(
+    [url] => https://api-3t.paypal.com/nvp
+    [content_type] => 
+    [http_code] => 0
+    [header_size] => 0
+    [request_size] => 0
+    [filetime] => -1
+    [ssl_verify_result] => 0
+    [redirect_count] => 0
+    [total_time] => 20.998
+    [namelookup_time] => 0
+    [connect_time] => 0
+    [pretransfer_time] => 0
+    [size_upload] => 0
+    [size_download] => 0
+    [speed_download] => 0
+    [speed_upload] => 0
+    [download_content_length] => -1
+    [upload_content_length] => -1
+    [starttransfer_time] => 0
+    [redirect_time] => 0
+    [certinfo] => Array
+        (
+        )
+
+    [redirect_url] => 
+)
+
+
