@@ -56,8 +56,25 @@ if (isset($_GET['info_message']) && zen_not_null($_GET['info_message'])) {
             <ul class="tools">
               <li class="contact dib">201-933-7565</li>  
               <li class="search-bar dib rel">
-                <input type="text" name="searchKey" class="search-input" value="search" />
+                <input type="text" name="searchKey" class="search-input" value="<?php echo isset($_GET['keyword'])?$_GET['keyword']:'search'?>"/>
                 <a href="javascript:;" class="search-btn abs"></a>
+                  <script>
+                      $(function(){
+                          $('.search-btn').click(function(){
+                              var key = $('input[name="searchKey"]').val();
+
+                              if($.trim(key) == '' || $.trim(key).toLowerCase() == 'search'){alert('Please input the keywords.');return false;}
+
+                              window.location.href="index.php?main_page=advanced_search_result&keyword="+encodeURIComponent(key)+"&search_in_description=1";
+                          });
+                          $('input[name="searchKey"]').focus(function(){
+                              if(this.value=='search') this.value='';
+                          }).blur(function(){
+                              if(this.value=='') this.value='search';
+                          });
+                      });
+
+                  </script>
               </li>  
             </ul>
             <div class="nav-bar rel">
