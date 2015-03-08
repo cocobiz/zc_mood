@@ -35,8 +35,15 @@ if (! isset($flag_disable_footer) || ! $flag_disable_footer) {
 			<p>Get latest news &amp; updates from Mood.</p>
 		</div>
 		<div class="newsletter-input fix l">
+            <?php
+            $content = '';
+            $content .= zen_draw_form('subscribe', zen_href_link(FILENAME_SUBSCRIBE, '', 'SSL'), 'post', '');
+            $content .= zen_draw_hidden_field('act', 'subscribe');
+            $content .= zen_draw_hidden_field('main_page',FILENAME_SUBSCRIBE);
+            echo $content;
+            ?>
 			<div class="input-box l">
-				<input type="text" value="example@mail.com" class="input-text placeholder" tabindex="-1" style="">
+				<input name="email" type="text" value="example@mail.com" class="input-text placeholder" tabindex="-1" style="">
 			</div>
 			<button type="submit" class="button">
 				<span>
@@ -44,6 +51,24 @@ if (! isset($flag_disable_footer) || ! $flag_disable_footer) {
 					Submit
 				</span>
 			</button>
+            </form>
+            <script>
+                $(function(){
+                    $('form[name="subscribe"]').submit(function(){
+                        var emailAdd = $.trim($(this).find('input[name="email"]').val());
+                        if(emailAdd == '' || emailAdd == 'example@mail.com'){
+                            alert('Please input a valid email address.');
+                            return false;
+                        }
+                    });
+                    $('input[name="email"]').blur(function(){
+                        if(this.value == '') this.value='example@mail.com';
+                    }).focus(function(){
+                        if(this.value == 'example@mail.com') this.value='';
+                    });
+                });
+
+            </script>
 		</div>
 		<div class="secure-shopping l fix">
 			<h5 class="sub-title dib l">
