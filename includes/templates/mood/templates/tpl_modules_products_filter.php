@@ -26,14 +26,7 @@ if ($show_filter) {
 	</ul>
 	<div class="view-mode r">
 		<span class="result"><?php echo $listing->RecordCount()?> Results</span>
-		<a href="" class="grid current">
-			<span></span>
-			Grid
-		</a>
-		<a href="" class="list">
-			<span></span>
-			List
-		</a>
+
 	</div>
 </div>
 <div class="filter-select-wrapper">
