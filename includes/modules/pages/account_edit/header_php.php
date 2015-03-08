@@ -76,6 +76,21 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
   $check_email_query = $db->bindVars($check_email_query, ':customersID', $_SESSION['customer_id'], 'integer');
   $check_email = $db->Execute($check_email_query);
 
+// BEGIN newsletter_subscribe mod 1/2
+  if(defined('NEWSONLY_SUBSCRIPTION_ENABLED') &&
+     (NEWSONLY_SUBSCRIPTION_ENABLED=='true')) {
+// dmcl1 -- check for email address already in subscribers table
+    $check_subscribers_query = "select count(*) as total 
+	                            from   " . TABLE_SUBSCRIBERS . "
+								where  email_address = :emailAddress
+								and    customers_id != :customersID";
+	$check_subscribers_query = $db->bindVars($check_subscribers_query, ':emailAddress', $email_address, 'string');
+	$check_subscribers_query = $db->bindVars($check_subscribers_query, ':customersID', $_SESSION['customer_id'], 'integer');
+    $check_subscribers = $db->Execute($check_subscribers_query);
+    $check_email->fields['total'] += $check_subscribers->fields['total'];
+  }
+// END newsletter_subscribe mod 1/2
+
   if ($check_email->fields['total'] > 0) {
     $error = true;
     $messageStack->add('account_edit', ENTRY_EMAIL_ADDRESS_ERROR_EXISTS);
@@ -140,6 +155,24 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
     array('fieldName'=>'entry_lastname', 'value'=>$lastname, 'type'=>'string'));
 
     $db->perform(TABLE_ADDRESS_BOOK, $sql_data_array, 'update', $where_clause);
+
+// BEGIN newsletter_subscribe mod 2/2
+// dmcl1 -- update SUBSCRIBERS table
+	if(defined('NEWSONLY_SUBSCRIPTION_ENABLED') &&
+	   (NEWSONLY_SUBSCRIPTION_ENABLED=='true')) {
+	   	
+	  $sql = "UPDATE " . TABLE_SUBSCRIBERS . " SET
+              email_address = :emailAddress,
+              email_format = :emailFormat
+              WHERE customers_id = :customersID";  
+         
+	  $sql = $db->bindVars($sql, ':emailAddress', $email_address, 'string');
+	  $sql = $db->bindVars($sql, ':emailFormat', $email_format, 'string');
+	  $sql = $db->bindVars($sql, ':customersID', $_SESSION['customer_id'], 'integer');
+ 
+      $db->Execute($sql);
+   }
+// END newsletter_subscribe mod 2/2
 
     $zco_notifier->notify('NOTIFY_HEADER_ACCOUNT_EDIT_UPDATES_COMPLETE');
 

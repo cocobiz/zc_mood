@@ -15,9 +15,9 @@
  * WE RECOMMEND THAT YOU USE SSL PROTECTION FOR YOUR ENTIRE ADMIN:
  * To do that, make sure you use a "https:" URL for BOTH the HTTP_SERVER and HTTPS_SERVER entries:
  */
-  define('HTTP_SERVER', 'http://pro');
+  define('HTTP_SERVER', 'http://localhost');
   define('HTTPS_SERVER', 'https://localhost');
-  define('HTTP_CATALOG_SERVER', 'http://pro');
+  define('HTTP_CATALOG_SERVER', 'http://localhost');
   define('HTTPS_CATALOG_SERVER', 'https://localhost');
 
   // secure webserver for admin?  Valid choices are 'true' or 'false' (including quotes).
@@ -51,10 +51,10 @@
 // * DIR_FS_* = Filesystem directories (local/physical)
   define('DIR_FS_ADMIN', realpath(dirname(__FILE__) . '/../') . '/');
   //the following path is a COMPLETE path to your Zen Cart files. eg: /var/www/vhost/accountname/public_html/store/
-  define('DIR_FS_CATALOG', 'E:/webcloud/www/projects/zc_mood/');
+  define('DIR_FS_CATALOG', '/home/lip/www/zc_mood/');
 
   //the following path is a COMPLETE path to the /logs/ folder  eg: /var/www/vhost/accountname/public_html/store/logs ... and no trailing slash
-  define('DIR_FS_LOGS', 'E:/webcloud/www/projects/zc_mood/logs');
+  define('DIR_FS_LOGS', 'home/lip/www/zc_mood/logs');
 
   define('DIR_FS_CATALOG_LANGUAGES', DIR_FS_CATALOG . 'includes/languages/');
   define('DIR_FS_CATALOG_IMAGES', DIR_FS_CATALOG . 'images/');
@@ -69,8 +69,8 @@
   define('DB_PREFIX', '');
   define('DB_CHARSET', 'utf8');
   define('DB_SERVER', 'localhost');
-  define('DB_SERVER_USERNAME', 'zc_demo');
-  define('DB_SERVER_PASSWORD', 'fangfei117');
+  define('DB_SERVER_USERNAME', 'root');
+  define('DB_SERVER_PASSWORD', 'Fangfei117');
   define('DB_DATABASE', 'zc_mood');
 
   // The next 2 "defines" are for SQL cache support.
@@ -79,7 +79,7 @@
   // or webserver user has write privileges (chmod 666 or 777). We recommend using the "cache" folder inside the Zen Cart folder
   // ie: /path/to/your/webspace/public_html/zen/cache   -- leave no trailing slash  
   define('SQL_CACHE_METHOD', 'none'); 
-  define('DIR_FS_SQL_CACHE', 'E:/webcloud/www/projects/zc_mood/cache');
+  define('DIR_FS_SQL_CACHE', 'home/lip/www/zc_mood/cache');
 
 
 // Define the webserver and path parameters

@@ -39,6 +39,28 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
     $sql = $db->bindVars($sql, ':customersID',$_SESSION['customer_id'], 'integer');
     $sql = $db->bindVars($sql, ':customersNewsletter',$newsletter_general, 'integer');
     $db->Execute($sql);
+
+// BEGIN newsletter_subscribe mod 1/1
+	if(defined('NEWSONLY_SUBSCRIPTION_ENABLED') &&
+		(NEWSONLY_SUBSCRIPTION_ENABLED=='true')) {
+
+		if ($newsletter_general == '0') {
+			$sql = "DELETE FROM " . TABLE_SUBSCRIBERS . " WHERE customers_id = :customersID";
+			$sql = $db->bindVars($sql, ':customersID',$_SESSION['customer_id'], 'integer');
+			$db->Execute($sql);
+		} elseif ($newsletter_general == '1') {
+			$updates = $db->Execute("SELECT customers_email_address, customers_email_format FROM " . TABLE_CUSTOMERS . " 
+				WHERE customers_id = '" . (int)$_SESSION['customer_id'] . "' ");
+			$sql = "INSERT INTO " . TABLE_SUBSCRIBERS . 
+					 " (customers_id, email_address, email_format) VALUES ('" .
+					 (int)$_SESSION['customer_id'] . "', '" .
+					 $updates->fields['customers_email_address'] . "', '" .
+					 $updates->fields['customers_email_format'] . "')";
+			$db->Execute($sql);
+		}
+	}
+// END newsletter_subscribe mod 1/1
+
   }
 
   $messageStack->add_session('account', SUCCESS_NEWSLETTER_UPDATED, 'success');

@@ -60,6 +60,23 @@
                  'text' => $customers_values->fields['customers_lastname'] . ', ' . $customers_values->fields['customers_firstname'] . ' (' . $customers_values->fields['customers_email_address'] . ')');
       $customers_values->MoveNext();
     }
+
+// BEGIN newsletter_subscribe mod 1/2
+	if(defined('NEWSONLY_SUBSCRIPTION_ENABLED') &&
+	   (NEWSONLY_SUBSCRIPTION_ENABLED=='true')) {
+// Pull all subscriber email addresses into the email list.
+// We do this separately to ensure these get listed after customers.
+	    $customers_values = $db->Execute("select email_address " .
+                  "from " . TABLE_SUBSCRIBERS . " WHERE email_format != 'NONE' " .
+                  "and confirmed = 1 and (customers_id IS NULL or customers_id = 0) order by email_address");
+    	while(!$customers_values->EOF) {
+	      $audience_list[] = array('id' => $customers_values->fields['email_address'],
+	                 'text' => TEXT_SUBSCRIBER_DEFAULT_NAME . ' (' . $customers_values->fields['email_address'] . ')');
+	      $customers_values->MoveNext();
+    	}
+	}
+// END newsletter_subscribe mod 1/2
+    
   }
   // send back the array for display in the SELECT drop-down menu
   return $audience_list;
@@ -88,10 +105,25 @@
   if ($query_name=='' && $query_category=='email') {
         $cust_email_address = zen_db_prepare_input($selected_entry);
         $query_name   = $cust_email_address;
+        
+// BEGIN newsletter_subscribe mod 2/2
+	if(defined('NEWSONLY_SUBSCRIPTION_ENABLED') &&
+	   (NEWSONLY_SUBSCRIPTION_ENABLED=='true')) {
+	   $query_string = "select c.customers_firstname, c.customers_lastname, " . 
+                   "s.email_address as customers_email_address from " . TABLE_SUBSCRIBERS . 
+                   " as s left join " . TABLE_CUSTOMERS . 
+                   " as c on c.customers_id = s.customers_id " .
+                   " where email_address = '" . zen_db_input($cust_email_address) . "'" .
+                   " and (s.confirmed = 1 or s.customers_id >= 1) ";
+
+	} else {        
         $query_string = "select customers_firstname, customers_lastname, customers_email_address
                               from " . TABLE_CUSTOMERS . "
                               where customers_email_address = '" . zen_db_input($cust_email_address) . "'";
-    }
+	}
+// END newsletter_subscribe mod 2/2
+
+  }
   //send back a 1-row array containing the query_name and the SQL query_string
   return array('query_name'=>$query_name, 'query_string'=>$query_string);
 }

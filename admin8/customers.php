@@ -238,7 +238,19 @@
                                    from " . TABLE_CUSTOMERS . "
                                    where customers_email_address = '" . zen_db_input($customers_email_address) . "'
                                    and customers_id != '" . (int)$customers_id . "'");
+      // BEGIN newsletter_subscribe mod 1/3
+// dmcl1 -- adding a check of the SUBSCRIBERS table
+	  $check_email_count = $check_email->RecordCount();
 
+	  if(defined('NEWSONLY_SUBSCRIPTION_ENABLED') && (NEWSONLY_SUBSCRIPTION_ENABLED=='true')) {
+	    $check_subscribers = $db->Execute("SELECT email_address FROM " . TABLE_SUBSCRIBERS . "
+	  									  WHERE email_address = '" . zen_db_input($customers_email_address) . "'
+										  AND customers_id != '" . (int)$customers_id . "' ");
+	    $check_email_count += $check_subscribers->RecordCount();
+	  }
+
+      if ($check_email->RecordCount() > 0) {
+// END newsletter_subscribe mod 1/3
       if ($check_email->RecordCount() > 0) {
         $error = true;
         $entry_email_address_exists = true;
@@ -292,7 +304,32 @@
         }
 
         zen_db_perform(TABLE_ADDRESS_BOOK, $sql_data_array, 'update', "customers_id = '" . (int)$customers_id . "' and address_book_id = '" . (int)$default_address_id . "'");
+        // BEGIN newsletter_subscribe mod 2/3
+// dmcl1 -- adding update/insert/delete for SUBSCRIBERS table
+	    if(defined('NEWSONLY_SUBSCRIPTION_ENABLED') && (NEWSONLY_SUBSCRIPTION_ENABLED=='true')) {
+          $subscribers = $db->Execute("SELECT count(*) as count FROM " . TABLE_SUBSCRIBERS . " 
+						  		       WHERE customers_id = '" . (int)$customers_id . "' ");
 
+		  if ($customers_newsletter == 1) {
+		    if ($subscribers->fields['count'] > 0) {
+			  $db->Execute("UPDATE " . TABLE_SUBSCRIBERS . " 
+						 SET	email_address = '" . zen_db_input($customers_email_address) . "',
+					 			email_format = '" . zen_db_input($customers_email_format) . "',
+                        confirmed = 1
+						 WHERE	customers_id = '" . (int)$customers_id . "' ");
+		    } else {
+		  	  $db->Execute("INSERT INTO " . TABLE_SUBSCRIBERS . "
+				  (customers_id, email_address, email_format, subscribed_date, confirmed)
+				  VALUES ('" . (int)$customers_id . "', '" . zen_db_input($customers_email_address) . "', '" . zen_db_input($customers_email_format) . "', now(), '1')");
+		    }
+		  } else {
+		    if ($subscribers->fields['count'] > 0) {
+		  	  $db->Execute("DELETE FROM " . TABLE_SUBSCRIBERS . "
+						   WHERE customers_id = '" . (int)$customers_id . "' ");
+		    }
+		  }
+	    }
+// END newsletter_subscribe mod 2/3
         zen_redirect(zen_href_link(FILENAME_CUSTOMERS, zen_get_all_get_params(array('cID', 'action')) . 'cID=' . $customers_id, 'NONSSL'));
 
         } else if ($error == true) {
@@ -346,6 +383,12 @@
         $db->Execute("delete from " . TABLE_WHOS_ONLINE . "
                       where customer_id = '" . (int)$customers_id . "'");
 
+// BEGIN newsletter_subscribe mod 3/3
+// dmcl1 -- adding delete for SUBSCRIBERS table
+        if(defined('NEWSONLY_SUBSCRIPTION_ENABLED') && (NEWSONLY_SUBSCRIPTION_ENABLED=='true')) {
+          $db->Execute("DELETE FROM " . TABLE_SUBSCRIBERS . " WHERE customers_id = '" . (int)$customers_id . "'");
+        }
+// END newsletter_subscribe mod 3/3
 
         zen_redirect(zen_href_link(FILENAME_CUSTOMERS, zen_get_all_get_params(array('cID', 'action')), 'NONSSL'));
         break;

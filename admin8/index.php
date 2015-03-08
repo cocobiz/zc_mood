@@ -58,7 +58,14 @@
   $reviews = $db->Execute("select count(*) as count from " . TABLE_REVIEWS);
   $reviews_pending = $db->Execute("select count(*) as count from " . TABLE_REVIEWS . " where status='0'");
 
-  $newsletters = $db->Execute("select count(*) as count from " . TABLE_CUSTOMERS . " where customers_newsletter = '1'");
+// BEGIN newsletter_subscribe mod 1/1
+  if(defined('NEWSONLY_SUBSCRIPTION_ENABLED') &&
+     (NEWSONLY_SUBSCRIPTION_ENABLED=='true')) {
+    $newsletters = $db->Execute("select count(*) as count from " . TABLE_SUBSCRIBERS . " where confirmed= '1' or customers_id >= '1'");
+  } else {
+    $newsletters = $db->Execute("select count(*) as count from " . TABLE_CUSTOMERS . " where customers_newsletter = '1'");
+  }
+// END newsletter_subscribe mod 1/1
 
   $counter_query = "select startdate, counter from " . TABLE_COUNTER;
   $counter = $db->Execute($counter_query);
