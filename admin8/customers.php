@@ -249,7 +249,7 @@
 	    $check_email_count += $check_subscribers->RecordCount();
 	  }
 
-      if ($check_email->RecordCount() > 0) {
+      //if ($check_email->RecordCount() > 0) {
 // END newsletter_subscribe mod 1/3
       if ($check_email->RecordCount() > 0) {
         $error = true;
